@@ -1,13 +1,14 @@
 package pkgGame;
 
 import static org.junit.Assert.*;
+import java.io.*;
 
 import java.util.Arrays;
 
 import org.junit.Test;
 
 public class SudokuTest {
-/*
+
 	@Test
 	public void Sudoku_Test1() {
 
@@ -46,7 +47,7 @@ public class SudokuTest {
 			Sudoku s1 = new Sudoku(puzzle);
 
 			region = s1.getRegion(1);
-			System.out.println(Arrays.toString(region));			
+//			System.out.println(Arrays.toString(region));			
 			assertTrue(Arrays.equals(ExpectedRegion, region));
 
 		} catch (Exception e) {
@@ -74,7 +75,7 @@ public class SudokuTest {
 			Sudoku s1 = new Sudoku(puzzle);
 
 			region = s1.getRegion(0,2);
-			System.out.println(Arrays.toString(region));			
+//			System.out.println(Arrays.toString(region));			
 			assertTrue(Arrays.equals(ExpectedRegion, region));
 
 		} catch (Exception e) {
@@ -229,7 +230,7 @@ public class SudokuTest {
 			fail("Test failed to build a Sudoku");
 		}
 		
-	}	*/
+	}
 
 	@Test
 	public void TestRegionNbr()
@@ -296,4 +297,55 @@ public class SudokuTest {
 		
 		assertTrue(s.getRegionNbr(8, 8)==8);
 	}
+	
+	@Test
+	public void getRegionNbr_Test3() throws Exception
+	{
+		int[][] puzzle = {{1,2,3,4},
+						  {2,3,4,1},
+						  {3,4,1,2},
+						  {4,1,2,3}};
+		
+		Sudoku s = new Sudoku(puzzle);
+		s.PrintPuzzle();
+		assertTrue(s.getRegionNbr(3,0)==1);
+	}
+	
+	@Test
+	public void PrintPuzzle_Test() throws Exception
+	{
+		int[][] puzzle = {{1,2,3,4},
+				  		  {2,3,4,1},
+				  		  {3,4,1,2},
+				  		  {4,1,2,3}};
+		Sudoku s = new Sudoku(puzzle); 
+		
+		final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+	    System.setOut(new PrintStream(outContent));
+	    s.PrintPuzzle();
+	    assertEquals("1 2 3 4 \n2 3 4 1 \n3 4 1 2 \n4 1 2 3 \n",outContent.toString());
+	}
+	
+/*
+	@Test
+	public void SetRegion_Test1() throws Exception
+	{
+		int[][] puzzle = { 
+		{ 5, 3, 4, 6, 7, 8, 9, 1, 2 }, 
+		{ 6, 7, 2, 1, 9, 5, 3, 4, 8 }, 
+		{ 1, 9, 8, 3, 4, 2, 5, 6, 7 },
+		{ 8, 5, 9, 7, 6, 1, 4, 2, 3 }, 
+		{ 4, 2, 6, 8, 5, 3, 7, 9, 1 }, 
+		{ 7, 1, 3, 9, 2, 4, 8, 5, 6 },
+		{ 9, 6, 1, 5, 3, 7, 2, 8, 4 }, 
+		{ 2, 8, 7, 4, 1, 9, 6, 3, 5 }, 	
+		{ 3, 4, 5, 2, 8, 6, 1, 7, 9 } };
+		
+		Sudoku s = new Sudoku(puzzle);
+		
+		assertTrue(Arrays.equals(s.set, a2));
+	}
+*/
+	
+	
 }

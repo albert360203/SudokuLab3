@@ -4,7 +4,6 @@ import pkgEnum.ePuzzleViolation;
 import pkgHelper.LatinSquare;
 import pkgHelper.PuzzleViolation;
 import java.security.SecureRandom;
-//import java.util.Random;
 
 /**
  * Sudoku - This class extends LatinSquare, adding methods, constructor to
@@ -273,18 +272,28 @@ public class Sudoku extends LatinSquare {
 		
 		return true;
 	}
-	public int getRegionNbr(int iCol, int iRow) {
+	
+	
+	public int getRegionNbr(int iCol, int iRow) 
+	{
 		int i = (iCol / iSqrtSize) + ((iRow / iSqrtSize) * iSqrtSize);
 		return i;
 	}
-	public void PrintPuzzle() {
-		for (int i = 0; i < this.getPuzzle().length; i++ ) {
-			for(int j = 0; j < this.getPuzzle().length; j++) {
+	
+	
+	public void PrintPuzzle() 
+	{
+		for (int i = 0; i < this.getPuzzle().length; i++ ) 
+		{
+			for(int j = 0; j < this.getPuzzle().length; j++) 
+			{
 				System.out.print(this.getPuzzle()[i][j]+ " ");
-							}
+			}
 			System.out.println();
 		}
 	}
+	
+	
 	private void FillDiagonalRegions() {
 		for (int i = 0; i<iSqrtSize; i++) {
 			int r = i*iSqrtSize + i;
@@ -297,42 +306,51 @@ public class Sudoku extends LatinSquare {
 			}
 		}
 		
-	private void SetRegion(int r) {
-		int[]reg = getRegion(r);
-		for (int i = 0; i < reg.length; i++) {
-			reg[i] = i;
-		}
+	private void SetRegion(int r) 
+	{
 		int i = (r / iSqrtSize) * iSqrtSize;
 		int j = (r % iSqrtSize) * iSqrtSize;		
 		int jMax = j + iSqrtSize;
 		int iMax = i + iSqrtSize;
-		int iCnt = 0;
-		for (; i < iMax; i++) {
-			for (j = (r % iSqrtSize) * iSqrtSize; j < jMax; j++) {
-				getPuzzle()[i][j] = reg[iCnt];
-				iCnt++;	
+		int iCnt = 1;
+		
+		for (; i < iMax; i++) 
+		{
+			for (; j < jMax; j++) 
+			{
+				getPuzzle()[i][j] = iCnt;
+				iCnt++;
 			}
 		}
-		
 	}
-	private void ShuffuleRegion(int r) {
+	
+	
+	private void ShuffuleRegion(int r) 
+	{
 		int[]reg = getRegion(r);
 		shuffuleArray(reg);
+		
 		int i = (r / iSqrtSize) * iSqrtSize;
 		int j = (r % iSqrtSize) * iSqrtSize;		
 		int jMax = j + iSqrtSize;
 		int iMax = i + iSqrtSize;
 		int iCnt = 0;
-		for (; i < iMax; i++) {
-			for (j = (r % iSqrtSize) * iSqrtSize; j < jMax; j++) {
+		
+		for (; i < iMax; i++) 
+		{
+			for (; j < jMax; j++) 
+			{
 				getPuzzle()[i][j] = reg[iCnt];
 				iCnt++;	
 			}
 		}
-		
 	}
-	private void shuffuleArray(int[] ar) {
-		for (int i=0; i<ar.length; i++) {
+	
+	
+	private void shuffuleArray(int[] ar) 
+	{
+		for (int i=0; i<ar.length; i++) 
+		{
 		    SecureRandom rand = new SecureRandom();
 			int RP = rand.nextInt(ar.length);
 		    int temp = ar[i];
